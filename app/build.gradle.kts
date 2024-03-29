@@ -92,4 +92,7 @@ dependencies {
 
     //Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    //Compose Foundation
+    implementation("androidx.compose.foundation:foundation:1.6.4")
 }
