@@ -11,7 +11,8 @@ import com.example.newsfeedr.R
 val Poppins = FontFamily(
     fonts = listOf(
         Font(R.font.poppins_regular, FontWeight.Normal),
-        Font(R.font.poppins_bold, FontWeight.Bold)
+        Font(R.font.poppins_bold, FontWeight.Bold),
+        Font(R.font.poppins_semibold, FontWeight.SemiBold),
     )
 )
 
