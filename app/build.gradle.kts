@@ -22,6 +22,10 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -85,8 +89,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 
     //Kotlinx Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //Coil
     implementation("io.coil-kt:coil-compose:2.4.0")
@@ -100,4 +103,9 @@ dependencies {
 
     //Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
+
+    //Paging 3
+    val paging_version = "3.2.1"
+    implementation("androidx.paging:paging-runtime:$paging_version")
+    implementation("androidx.paging:paging-compose:3.2.1")
 }
