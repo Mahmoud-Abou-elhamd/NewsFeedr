@@ -1,5 +1,6 @@
 package com.example.newsfeedr.presentation.news_navigator
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -77,6 +78,17 @@ fun NewsNavigator() {
         }
     }
 }
+
+@Composable
+fun OnBackClickStateSaver(navController: NavController) {
+    BackHandler(true) {
+        navigateToTab(
+            navController = navController,
+            route = Route.HomeScreen.route
+        )
+    }
+}
+
 
 private fun navigateToTab(navController: NavController, route: String) {
     navController.navigate(route) {
