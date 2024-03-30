@@ -1,30 +1,25 @@
 package com.example.newsfeedr.presentation.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.newsfeedr.presentation.Dimens.MediumPadding1
+import com.example.newsfeedr.presentation.Dimens.MediumPadding
 import com.example.newsfeedr.presentation.common.ArticlesList
-import com.example.newsfeedr.presentation.common.EmptyScreen
 import com.example.newsfeedr.presentation.common.SearchBar
-import kotlinx.coroutines.flow.toList
 
 @Composable
 fun HomeScreen(
     state: HomeState,
     event:(HomeEvent) -> Unit,
-    //isFavorite: Boolean = false
 ) {
     Column(
         modifier = Modifier
-            .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
+            .padding(top = MediumPadding, start = MediumPadding, end = MediumPadding)
             .statusBarsPadding()
     ) {
         SearchBar(
@@ -35,17 +30,14 @@ fun HomeScreen(
                 event(HomeEvent.SearchNews)
             }
         )
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(MediumPadding))
         state.articles?.let {
             val articles = it.collectAsLazyPagingItems()
             ArticlesList(
                 articles = articles,
-                //isFavorite = state.article.isFavorite,
                 onClick = { article ->
-                    //article.isFavorite = state.article.isFavorite
                     event(HomeEvent.UpsertDeleteArticle(article))
                     article.isFavorite = state.article.isFavorite
-                    Log.v("test", state.article.isFavorite.toString())
                 }
             )
         }

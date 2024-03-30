@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.newsfeedr.R
-import com.example.newsfeedr.presentation.Dimens.ExtraSmallPadding2
+import com.example.newsfeedr.presentation.Dimens.SmallPadding
 import com.example.newsfeedr.presentation.Dimens.IconSize
 import com.example.newsfeedr.ui.theme.NewsFeedrTheme
 
@@ -47,7 +47,7 @@ fun NewsBottomNavigation(
                             contentDescription = null,
                             modifier = Modifier.size(IconSize),
                         )
-                        Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+                        Spacer(modifier = Modifier.height(SmallPadding))
                         Text(text = item.text, style = MaterialTheme.typography.labelSmall)
                     }
                 },

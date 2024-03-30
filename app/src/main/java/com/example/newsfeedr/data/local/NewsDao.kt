@@ -23,5 +23,5 @@ interface NewsDao {
     suspend fun getArticle(url: String): Article?
 
     @Query("UPDATE Article SET isFavorite=:isFavorite WHERE url=:url")
-    suspend fun setFavoriteOrNot(isFavorite: Boolean, url: String)
+    suspend fun toggleFavorite(isFavorite: Boolean, url: String)
 }

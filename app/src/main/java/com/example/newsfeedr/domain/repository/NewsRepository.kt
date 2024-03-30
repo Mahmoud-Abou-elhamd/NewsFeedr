@@ -15,5 +15,5 @@ interface NewsRepository {
 
     suspend fun selectArticle(url: String): Article?
 
-    suspend fun setFavoriteOrNot(isFavorite: Boolean, url: String)
+    suspend fun toggleFavorite(isFavorite: Boolean, url: String)
 }

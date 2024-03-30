@@ -25,7 +25,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.example.newsfeedr.R
 import com.example.newsfeedr.presentation.Dimens
-import com.example.newsfeedr.presentation.Dimens.MediumPadding1
+import com.example.newsfeedr.presentation.Dimens.MediumPadding
 
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.shimmerEffect() = composed {
@@ -60,7 +60,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(30.dp)
-                    .padding(horizontal = MediumPadding1)
+                    .padding(horizontal = MediumPadding)
                     .shimmerEffect()
             )
             Row(
@@ -69,11 +69,10 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
-                        .padding(horizontal = MediumPadding1)
+                        .padding(horizontal = MediumPadding)
                         .height(15.dp)
                         .shimmerEffect()
                 )
-
             }
         }
     }

@@ -16,7 +16,6 @@ class FavoriteViewModel @Inject constructor(
 ) : ViewModel() {
     private val _state = mutableStateOf(FavoriteState())
     val state: State<FavoriteState> = _state
-
     init {
         getArticles()
     }

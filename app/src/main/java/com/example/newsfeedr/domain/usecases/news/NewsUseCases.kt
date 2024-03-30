@@ -6,5 +6,5 @@ data class NewsUseCases(
     val deleteArticle: DeleteArticle,
     val selectArticles: SelectArticles,
     val selectArticle: SelectArticle,
-    val setFavoriteArticle: SetFavoriteArticle
+    val toggleFavoriteArticle: ToggleFavoriteArticle
 )

@@ -6,17 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,8 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter.State.Empty.painter
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.newsfeedr.R
@@ -40,7 +34,7 @@ import com.example.newsfeedr.domain.model.Article
 import com.example.newsfeedr.domain.model.Source
 import com.example.newsfeedr.presentation.Dimens.ArticleCardSize
 import com.example.newsfeedr.presentation.Dimens.ExtraSmallPadding
-import com.example.newsfeedr.presentation.Dimens.ExtraSmallPadding2
+import com.example.newsfeedr.presentation.Dimens.SmallPadding
 import com.example.newsfeedr.presentation.Dimens.SmallIconSize
 import com.example.newsfeedr.ui.theme.NewsFeedrTheme
 
@@ -49,7 +43,6 @@ fun ArticleCard(
     modifier: Modifier = Modifier,
     article: Article,
     onClick: (() -> Unit)? = null,
-    isFavorite: Boolean = false
 ) {
     val context = LocalContext.current
     Row(
@@ -69,7 +62,7 @@ fun ArticleCard(
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(horizontal = ExtraSmallPadding2)
+                .padding(horizontal = SmallPadding)
                 .wrapContentHeight()
         ) {
             Text(
@@ -86,7 +79,7 @@ fun ArticleCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+            Spacer(modifier = Modifier.height(SmallPadding))
             Text(
                 text = article.description,
                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light),
@@ -94,7 +87,7 @@ fun ArticleCard(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+            Spacer(modifier = Modifier.height(SmallPadding))
             Text(
                 text = article.url,
                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light),
@@ -102,7 +95,7 @@ fun ArticleCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+            Spacer(modifier = Modifier.height(SmallPadding))
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {

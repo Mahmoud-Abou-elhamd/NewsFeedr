@@ -43,7 +43,7 @@ class NewsRepositoryImpl(
         return newsDao.getArticle(url)
     }
 
-    override suspend fun setFavoriteOrNot(isFavorite: Boolean, url: String) {
-        newsDao.setFavoriteOrNot(isFavorite, url)
+    override suspend fun toggleFavorite(isFavorite: Boolean, url: String) {
+        newsDao.toggleFavorite(isFavorite, url)
     }
 }

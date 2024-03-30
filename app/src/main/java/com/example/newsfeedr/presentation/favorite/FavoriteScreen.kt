@@ -14,7 +14,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.newsfeedr.R
 import com.example.newsfeedr.domain.model.Article
-import com.example.newsfeedr.presentation.Dimens.MediumPadding1
+import com.example.newsfeedr.presentation.Dimens.MediumPadding
 import com.example.newsfeedr.presentation.common.ArticlesList
 
 @Composable
@@ -26,7 +26,7 @@ fun FavoriteScreen(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
-            .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
+            .padding(top = MediumPadding, start = MediumPadding, end = MediumPadding)
     ) {
         Text(
             text = "Favorite",
@@ -34,7 +34,7 @@ fun FavoriteScreen(
             color = colorResource(id = R.color.text_title)
         )
 
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(MediumPadding))
 
         ArticlesList(articles = state.articles, onClick = { navigateToDetails(it) })
     }
