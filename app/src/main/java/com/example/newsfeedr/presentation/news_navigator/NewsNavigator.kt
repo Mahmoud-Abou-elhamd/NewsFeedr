@@ -12,12 +12,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newsfeedr.R
+import com.example.newsfeedr.presentation.favorite.FavoriteScreen
+import com.example.newsfeedr.presentation.favorite.FavoriteViewModel
+import com.example.newsfeedr.presentation.home.HomeScreen
+import com.example.newsfeedr.presentation.home.HomeViewModel
 import com.example.newsfeedr.presentation.navgraph.Route
 import com.example.newsfeedr.presentation.news_navigator.common.BottomNavigationItem
 import com.example.newsfeedr.presentation.news_navigator.common.NewsBottomNavigation
@@ -28,7 +33,6 @@ fun NewsNavigator() {
     val bottomNavigationItems = remember {
         listOf(
             BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
             BottomNavigationItem(icon = R.drawable.ic_favorite, text = "Favorite"),
         )
     }
@@ -70,26 +74,21 @@ fun NewsNavigator() {
             modifier = Modifier.padding(bottom = bottomPadding)
         ) {
             composable(route = Route.HomeScreen.route) {
-
+                val viewModel: HomeViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                HomeScreen(
+                    state = state,
+                    event = viewModel::onEvent,
+                )
             }
             composable(route = Route.FavoriteScreen.route) {
-
+                val viewModel: FavoriteViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                FavoriteScreen(state = state, navigateToDetails = {})
             }
         }
     }
 }
-
-@Composable
-fun OnBackClickStateSaver(navController: NavController) {
-    BackHandler(true) {
-        navigateToTab(
-            navController = navController,
-            route = Route.HomeScreen.route
-        )
-    }
-}
-
-
 private fun navigateToTab(navController: NavController, route: String) {
     navController.navigate(route) {
         navController.graph.startDestinationRoute?.let { screen_route ->

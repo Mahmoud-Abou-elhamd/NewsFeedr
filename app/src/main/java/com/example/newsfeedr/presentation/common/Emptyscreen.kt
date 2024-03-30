@@ -33,7 +33,7 @@ import java.net.SocketTimeoutException
 
 
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null) {
+fun EmptyScreen(error: LoadState.Error? = null, msg: String = "") {
 
     var message by remember {
         mutableStateOf(parseErrorMessage(error = error))
@@ -45,6 +45,11 @@ fun EmptyScreen(error: LoadState.Error? = null) {
 
     if (error == null){
         message = "You have not saved news so far !"
+        icon = R.drawable.ic_search_document
+    }
+
+    if(msg.isEmpty()){
+        message = "No Results!"
         icon = R.drawable.ic_search_document
     }
 

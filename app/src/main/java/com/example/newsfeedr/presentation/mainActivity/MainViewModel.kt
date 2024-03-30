@@ -1,7 +1,9 @@
 package com.example.newsfeedr.presentation.mainActivity
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsfeedr.domain.usecases.app_entry.AppEntryUseCases
@@ -16,15 +18,15 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val appEntryUseCases: AppEntryUseCases
 ) : ViewModel() {
-    private val _splashCondition = mutableStateOf(true)
-    val splashCondition: State<Boolean> = _splashCondition
+    var splashCondition by mutableStateOf(true)
+        private set
 
-    private val _startDestination = mutableStateOf(Route.NewsNavigation.route)
-    val startDestination: State<String> = _startDestination
+    var startDestination by mutableStateOf(Route.NewsNavigation.route)
+        private set
 
     init {
         appEntryUseCases.readAppEntry().onEach {
-            _splashCondition.value = false
+            splashCondition = false
         }.launchIn(viewModelScope)
     }
 }

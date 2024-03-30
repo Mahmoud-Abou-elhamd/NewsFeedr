@@ -16,6 +16,10 @@ class HomeViewModel @Inject constructor(
     private var _state = mutableStateOf(HomeState())
     val state: State<HomeState> = _state
 
+    init {
+        searchNews()
+    }
+
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.UpdateSearchQuery -> {

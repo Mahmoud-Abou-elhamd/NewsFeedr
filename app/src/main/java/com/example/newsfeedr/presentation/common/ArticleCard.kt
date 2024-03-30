@@ -6,10 +6,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,7 +29,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.newsfeedr.R
 import com.example.newsfeedr.domain.model.Article
@@ -41,42 +48,61 @@ fun ArticleCard(
     article: Article,
     onClick: (() -> Unit)? = null
 ) {
-
     val context = LocalContext.current
     Row(
         modifier = modifier.clickable { onClick?.invoke() },
-
+        verticalAlignment = Alignment.Top
         ) {
-        AsyncImage(
+        SubcomposeAsyncImage(
             modifier = Modifier
                 .size(ArticleCardSize)
                 .clip(MaterialTheme.shapes.medium),
+            loading = {CircularProgressIndicator(Modifier.padding(all = 20.dp))},
+            error = { it.let { R.drawable.ic_time } },
             model = ImageRequest.Builder(context).data(article.urlToImage).build(),
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(horizontal = ExtraSmallPadding)
-                .height(ArticleCardSize)
+                .padding(horizontal = ExtraSmallPadding2)
+                .wrapContentHeight()
         ) {
             Text(
                 text = article.title,
                 style = MaterialTheme.typography.bodyMedium.copy(),
                 color = colorResource(id = R.color.text_title),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = article.author ?: article.source.name,
+                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                color = colorResource(id = R.color.body),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+            Text(
+                text = article.description,
+                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light),
+                color = colorResource(id = R.color.body),
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
+            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+            Text(
+                text = article.url,
+                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light),
+                color = colorResource(id = R.color.body),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(modifier = Modifier.height(ExtraSmallPadding2))
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = article.source.name,
-                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                    color = colorResource(id = R.color.body)
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_time),
                     contentDescription = null,

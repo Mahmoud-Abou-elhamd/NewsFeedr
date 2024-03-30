@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen().apply {
-            setKeepOnScreenCondition(condition = {viewModel.splashCondition.value})
+            setKeepOnScreenCondition(condition = {viewModel.splashCondition})
         }
         setContent {
             NewsFeedrTheme(
@@ -42,8 +42,9 @@ class MainActivity : ComponentActivity() {
                         darkIcons = !isSystemInDarkMode
                     )
                 }
-                Box(modifier = Modifier.background(MaterialTheme.colorScheme.background).fillMaxSize()) {
-                    NavGraph(startDestination = viewModel.startDestination.value)
+                Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
+                    val startDestination = viewModel.startDestination
+                    NavGraph(startDestination = startDestination)
                 }
             }
         }

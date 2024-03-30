@@ -6,14 +6,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.newsfeedr.presentation.Dimens.MediumPadding1
 import com.example.newsfeedr.presentation.common.ArticlesList
+import com.example.newsfeedr.presentation.common.EmptyScreen
 import com.example.newsfeedr.presentation.common.SearchBar
+import kotlinx.coroutines.flow.toList
 
 @Composable
-fun SearchScreen(
+fun HomeScreen(
     state: HomeState,
     event:(HomeEvent) -> Unit
 ) {

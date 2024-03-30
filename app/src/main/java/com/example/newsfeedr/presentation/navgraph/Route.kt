@@ -10,4 +10,5 @@ sealed class Route(
     object FavoriteScreen : Route(route = "favoriteScreen")
     object AppStartNavigation : Route(route = "appStartNavigation")
     object NewsNavigation : Route(route = "newsNavigation")
+    object NewsNavigatorScreen : Route(route = "newsNavigator")
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.example.newsfeedr.domain.model.Article
@@ -17,24 +18,38 @@ import com.example.newsfeedr.presentation.Dimens.MediumPadding1
 @Composable
 fun ArticlesList(
     modifier: Modifier = Modifier,
-    articles: LazyPagingItems<Article>,
-    onClick:(Article) -> Unit
+    articles: List<Article>,
+    onClick: (Article) -> Unit
 ) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+        contentPadding = PaddingValues(all = ExtraSmallPadding2)
+    ) {
+        items(count = articles.size) {
+            val article = articles[it]
+            ArticleCard(article = article, onClick = { onClick(article) })
+        }
+    }
+}
 
-    val handlePagingResult = handlePagingResult(articles)
 
-
+@Composable
+fun ArticlesList(
+    modifier: Modifier = Modifier,
+    articles: LazyPagingItems<Article>,
+    onClick: (Article) -> Unit
+) {
+    val handlePagingResult = handlePagingResult(articles = articles)
     if (handlePagingResult) {
         LazyColumn(
             modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(MediumPadding1),
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
-            items(
-                count = articles.itemCount,
-            ) {
-                articles[it]?.let { article ->
-                    ArticleCard(article = article, onClick = {onClick(article)})
+            items(count = articles.itemCount) {
+                articles[it]?.let {
+                    ArticleCard(article = it, onClick = { onClick(it) })
                 }
             }
         }
@@ -59,6 +74,11 @@ fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
 
         error != null -> {
             EmptyScreen(error = error)
+            false
+        }
+
+        articles.itemCount == 0 -> {
+            EmptyScreen(msg = "")
             false
         }
 
