@@ -19,7 +19,8 @@ import com.example.newsfeedr.presentation.Dimens.MediumPadding1
 fun ArticlesList(
     modifier: Modifier = Modifier,
     articles: List<Article>,
-    onClick: (Article) -> Unit
+    onClick: (Article) -> Unit,
+    isFavorite: Boolean = false
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -28,7 +29,7 @@ fun ArticlesList(
     ) {
         items(count = articles.size) {
             val article = articles[it]
-            ArticleCard(article = article, onClick = { onClick(article) })
+            ArticleCard(article = article, onClick = { onClick(article) }, isFavorite = isFavorite)
         }
     }
 }
@@ -38,7 +39,8 @@ fun ArticlesList(
 fun ArticlesList(
     modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,
-    onClick: (Article) -> Unit
+    onClick: (Article) -> Unit,
+    isFavorite: Boolean = false
 ) {
     val handlePagingResult = handlePagingResult(articles = articles)
     if (handlePagingResult) {
@@ -49,7 +51,7 @@ fun ArticlesList(
         ) {
             items(count = articles.itemCount) {
                 articles[it]?.let {
-                    ArticleCard(article = it, onClick = { onClick(it) })
+                    ArticleCard(article = it, onClick = { onClick(it) }, isFavorite = isFavorite)
                 }
             }
         }

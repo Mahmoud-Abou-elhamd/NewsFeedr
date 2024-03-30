@@ -20,7 +20,7 @@ import com.example.newsfeedr.presentation.common.ArticlesList
 @Composable
 fun FavoriteScreen(
     state: FavoriteState,
-    navigateToDetails: (Article) -> Unit
+    navigateToDetails: (Article) -> Boolean
 ) {
     Column(
         modifier = Modifier

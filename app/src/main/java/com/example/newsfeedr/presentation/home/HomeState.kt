@@ -6,5 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 data class HomeState(
     val searchQuery: String = "",
-    val articles: Flow<PagingData<Article>>? = null
+    val articles: Flow<PagingData<Article>>? = null,
+    var article: ArticleState = ArticleState(isFavorite = true)
 )

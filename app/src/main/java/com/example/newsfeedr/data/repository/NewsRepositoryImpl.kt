@@ -42,4 +42,8 @@ class NewsRepositoryImpl(
     override suspend fun selectArticle(url: String): Article? {
         return newsDao.getArticle(url)
     }
+
+    override suspend fun setFavoriteOrNot(isFavorite: Boolean, url: String) {
+        newsDao.setFavoriteOrNot(isFavorite, url)
+    }
 }

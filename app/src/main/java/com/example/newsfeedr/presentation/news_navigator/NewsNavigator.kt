@@ -84,7 +84,7 @@ fun NewsNavigator() {
             composable(route = Route.FavoriteScreen.route) {
                 val viewModel: FavoriteViewModel = hiltViewModel()
                 val state = viewModel.state.value
-                FavoriteScreen(state = state, navigateToDetails = {})
+                FavoriteScreen(state = state, navigateToDetails = {false})
             }
         }
     }

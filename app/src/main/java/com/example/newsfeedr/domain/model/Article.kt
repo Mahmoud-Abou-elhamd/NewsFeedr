@@ -15,5 +15,6 @@ data class Article(
     val source: Source,
     val title: String,
     @PrimaryKey val url: String,
-    val urlToImage: String
+    val urlToImage: String,
+    var isFavorite: Boolean = false
 ) : Parcelable

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter.State.Empty.painter
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.newsfeedr.R
@@ -46,7 +48,8 @@ import com.example.newsfeedr.ui.theme.NewsFeedrTheme
 fun ArticleCard(
     modifier: Modifier = Modifier,
     article: Article,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
+    isFavorite: Boolean = false
 ) {
     val context = LocalContext.current
     Row(
@@ -115,6 +118,13 @@ fun ArticleCard(
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.body)
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    painter = if(article.isFavorite) painterResource(id = R.drawable.ic_filled_favorite) else painterResource(id = R.drawable.ic_favorite),
+                    contentDescription = null,
+                    modifier = Modifier.size(SmallIconSize),
+                    tint = colorResource(id = R.color.body)
+                )
             }
         }
     }
@@ -135,7 +145,8 @@ fun ArticleCardPreview() {
                 title = "Her train broke down. Her phone died. And then she met her Saver in a",
                 url = "",
                 urlToImage = "https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/11787/production/_124395517_bbcbreakingnewsgraphic.jpg"
-            )
+            ),
+            onClick = {}
         )
     }
 }

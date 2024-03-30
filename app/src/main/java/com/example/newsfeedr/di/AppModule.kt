@@ -18,6 +18,7 @@ import com.example.newsfeedr.domain.usecases.news.NewsUseCases
 import com.example.newsfeedr.domain.usecases.news.SearchNews
 import com.example.newsfeedr.domain.usecases.news.SelectArticle
 import com.example.newsfeedr.domain.usecases.news.SelectArticles
+import com.example.newsfeedr.domain.usecases.news.SetFavoriteArticle
 import com.example.newsfeedr.domain.usecases.news.UpsertArticle
 import com.example.newsfeedr.util.Constants.BASE_URL
 import com.example.newsfeedr.util.Constants.NEWS_DATABASE_NAME
@@ -78,7 +79,8 @@ object AppModule {
             upsertArticle = UpsertArticle(newsRepository),
             deleteArticle = DeleteArticle(newsRepository),
             selectArticles = SelectArticles(newsRepository),
-            selectArticle = SelectArticle(newsRepository)
+            selectArticle = SelectArticle(newsRepository),
+            setFavoriteArticle = SetFavoriteArticle(newsRepository)
         )
     }
 

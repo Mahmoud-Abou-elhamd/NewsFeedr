@@ -1,5 +1,6 @@
 package com.example.newsfeedr.presentation.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -18,7 +19,8 @@ import kotlinx.coroutines.flow.toList
 @Composable
 fun HomeScreen(
     state: HomeState,
-    event:(HomeEvent) -> Unit
+    event:(HomeEvent) -> Unit,
+    //isFavorite: Boolean = false
 ) {
     Column(
         modifier = Modifier
@@ -38,8 +40,12 @@ fun HomeScreen(
             val articles = it.collectAsLazyPagingItems()
             ArticlesList(
                 articles = articles,
-                onClick = {
-
+                //isFavorite = state.article.isFavorite,
+                onClick = { article ->
+                    //article.isFavorite = state.article.isFavorite
+                    event(HomeEvent.UpsertDeleteArticle(article))
+                    article.isFavorite = state.article.isFavorite
+                    Log.v("test", state.article.isFavorite.toString())
                 }
             )
         }
